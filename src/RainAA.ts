@@ -3,7 +3,7 @@ import { WalletClientSigner } from '@alchemy/aa-core';
 import { alchemy } from "@account-kit/infra";
 import { createSmartWalletClient } from "@account-kit/wallet-client";
 
-import { RainConfig } from './types';
+import { RainConfig } from './types.js';
 
 export class RainAA {
     private config: RainConfig;

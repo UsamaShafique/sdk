@@ -1,6 +1,6 @@
-import { API_BASE_URL } from '../config/api';
-import { MARKET_SORT_BY, MARKET_STATUS } from './constants';
-import { GetMarketsParams, Market } from './types';
+import { API_BASE_URL } from '../config/api.js';
+import { MARKET_SORT_BY, MARKET_STATUS } from './constants.js';
+import { GetMarketsParams, Market } from './types.js';
 
 export async function getMarkets(
     params: GetMarketsParams

@@ -1,7 +1,8 @@
 import { encodeFunctionData } from "viem";
-import { ERC20Abi } from "../abi/ERC20Abi";
-import { ApproveTxParams, RawTransaction } from "./types";
+import { ERC20Abi } from "../abi/ERC20Abi.js";
+import { ApproveTxParams, RawTransaction } from "./types.js";
 import { ethers } from "ethers";
+import { APPROVE_TOKEN } from "../constants/contractmethods.js";
 
 const DEFAULT_APPROVE_AMOUNT = ethers.MaxUint256;
 
@@ -21,7 +22,7 @@ export function buildApproveRawTx(
         to: tokenAddress,
         data: encodeFunctionData({
             abi: ERC20Abi,
-            functionName: "approve",
+            functionName: APPROVE_TOKEN,
             args: [spender, amount],
         }),
         value: 0n,

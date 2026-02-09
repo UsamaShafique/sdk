@@ -71,6 +71,37 @@ const markets = await rain.getPublicMarkets({
 
 ---
 
+## buildApprovalTx
+
+```
+Builds a raw ERC20 approval transaction if needed.
+
+This function prepares an unsigned approve(spender, amount) transaction and does not execute it.
+
+If amount is not provided, a default large allowance is approved.
+```
+
+### Return Type
+
+```ts
+interface RawTransaction {
+  to: `0x${string}`;
+  data: `0x${string}`;
+}
+```
+
+### Example
+
+```ts
+const approvalTx = rain.buildApprovalTx({ 
+  tokenAddress: `0x${string}`, // Approval token address 
+  spender: `0x${string}`,  // Market contract address
+  amount?: 1000000000000000000n // optional parameter
+   });
+```
+
+---
+
 ## buildBuyOptionRawTx
 
 Builds a **raw EVM transaction** for entering a market option.
@@ -113,15 +144,38 @@ const rawTx = rain.buildBuyOptionRawTx({
 ```
 ---
 
-## buildApprovalTx
+## buildLimitBuyOptionTx
 
+Builds a **raw EVM transaction** for placing a limit buy order on a Rain market.
+
+This function **does not send the transaction** — it only prepares calldata.
+
+### Method Signature
+
+```ts
+buildLimitBuyOptionTx(params: EnterLimitOptionTxParams): RawTransaction
 ```
-Builds a raw ERC20 approval transaction if needed.
 
-This function prepares an unsigned approve(spender, amount) transaction and does not execute it.
+### Parameters
 
-If amount is not provided, a default large allowance is approved.
+```ts
+interface EnterLimitOptionTxParams {
+    marketContractAddress: `0x${string}`; // market contract address
+    selectedOption: number; // Option index
+    pricePerShare: bigint; // price per share
+    buyAmountInWei: bigint; // total buy amount (already converted to token wei)
+    tokenDecimals?: number; // token decimals optional (default: `6`)
+}
 ```
+### Validations
+
+| Field                   | Type          | Required | Description                                            |
+| ----------------------- | ------------- | -------- | ------------------------------------------------------ |
+| `marketContractAddress` | `0x${string}` | ✅        | Address of the market contract             |
+| `selectedOption`        | `number`      | ✅        | Option index to place the buy order for                |
+| `pricePerShare`         | `number`      | ✅        | Limit price per share (between `0` and `1`)            |
+| `buyAmountInWei`        | `bigint`      | ✅        | Total amount to spend (already converted to token wei) |
+| `tokenDecimals`         | `number`      | ❌        | Token decimals optional (default: `6`)                          |
 
 ### Return Type
 
@@ -135,11 +189,12 @@ interface RawTransaction {
 ### Example
 
 ```ts
-const approvalTx = rain.buildApprovalTx({ 
-  tokenAddress: `0x${string}`, // Approval token address 
-  spender: `0x${string}`,  // Market contract address
-  amount?: 1000000000000000000n // optional parameter
-   });
+rain.buildLimitBuyOptionTx({
+    marketContractAddress: `0x${string}`,
+    buyAmountInWei: 1000000,
+    pricePerShare: 0.1,
+    selectedOption: 1,
+  })
 ```
 
 ---

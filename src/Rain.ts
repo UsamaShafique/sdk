@@ -1,8 +1,8 @@
-import { GetMarketsParams, Market } from './markets/types';
-import { getMarkets } from './markets/getMarkets';
-import { ApproveTxParams, EnterOptionTxParams, RawTransaction } from './tx/types';
-import { buildEnterOptionRawTx } from './tx/buildRawTransactions';
-import { buildApproveRawTx } from './tx/buildApprovalRawTx';
+import { GetMarketsParams, Market } from './markets/types.js';
+import { getMarkets } from './markets/getMarkets.js';
+import { ApproveTxParams, EnterLimitOptionTxParams, EnterOptionTxParams, RawTransaction } from './tx/types.js';
+import { buildEnterOptionRawTx, buildLimitBuyOrderRawTx } from './tx/buildRawTransactions.js';
+import { buildApproveRawTx } from './tx/buildApprovalRawTx.js';
 
 export class Rain {
 
@@ -16,6 +16,12 @@ export class Rain {
 
   buildBuyOptionRawTx(params: EnterOptionTxParams): RawTransaction {
     return buildEnterOptionRawTx(params);
+  }
+
+  buildLimitBuyOptionTx(
+    params: EnterLimitOptionTxParams
+  ): RawTransaction {
+    return buildLimitBuyOrderRawTx(params);
   }
 
 }

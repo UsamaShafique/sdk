@@ -15,3 +15,11 @@ export type ApproveTxParams = {
     spender: `0x${string}`;
     amount?: bigint; // defaults to max uint256
 };
+
+export interface EnterLimitOptionTxParams {
+    marketContractAddress: `0x${string}`;           // TradeMarket contract
+    selectedOption: number;
+    pricePerShare: bigint;     // price per share
+    buyAmountInWei: bigint;                 // total buy amount
+    tokenDecimals?: number;
+}

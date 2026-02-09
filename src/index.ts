@@ -1,3 +1,3 @@
-export { Rain } from './Rain';
-export { RainAA } from './RainAA'
-export * from './types';
+export { Rain } from './Rain.js';
+export { RainAA } from './RainAA.js'
+export * from './types.js';
