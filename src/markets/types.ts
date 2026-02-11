@@ -19,3 +19,37 @@ export interface Market {
     status: MarketStatus;
     // add more fields as your API returns
 }
+
+export interface MarketOption {
+    optionName: string;
+}
+
+export interface CreateMarketParams {
+    authToken: string;
+    question: string;
+    isPrivate: boolean;
+    contractAddress: `0x${string}`;
+    poolTrxHash: `0x${string}`;
+    ipfsURL: string;
+    poolDescription: string;
+    tags: string[];
+    options: MarketOption[];
+    startDate: string;    // ISO 8601
+    endDate: string;      // ISO 8601
+    liquidityMax: number;
+}
+
+export interface CreateMarketResponse {
+    _id: string;
+    question: string;
+    isPrivate: boolean;
+    tags: string[];
+    startDate: string;
+    endDate: string;
+    options: MarketOption[];
+    liquidityMax: number;
+    contractAddress: `0x${string}`;
+    poolTrxHash: `0x${string}`;
+    ipfsURL: string;
+    accessCode?: string;  // only for private markets
+}
