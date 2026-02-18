@@ -149,7 +149,7 @@ interface CreateMarketTxParams {
 | `creator`                | `0x${string}`      | ✅        | Market creator address           |
 | `startTime`              | `number \| bigint` | ✅        | Market start timestamp           |
 | `endTime`                | `number \| bigint` | ✅        | Must be greater than `startTime` |
-| `options`                | `number`           | ✅        | Number of market options (> 2)   |
+| `no_of_options`                | `number`           | ✅        | Number of market options (> 2)   |
 | `ipfsUrl`                | `string`           | ✅        | IPFS CID containing metadata     |
 | `inputAmountWei`         | `bigint`           | ✅        | Initial liquidity amount         |
 | `barValues`              | `array`            | ✅        | Cannot be empty                  |
